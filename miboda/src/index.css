@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Wedding Pastel Pink Theme */
+    --background: 348 100% 99%;
+    --foreground: 340 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 340 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 340 30% 15%;
+
+    /* Primary - Rosa Bebé */
+    --primary: 340 70% 88%;
+    --primary-foreground: 340 50% 25%;
+
+    /* Secondary - Menta Suave */
+    --secondary: 165 50% 80%;
+    --secondary-foreground: 165 40% 25%;
+
+    /* Accent - Melocotón */
+    --accent: 20 100% 92%;
+    --accent-foreground: 20 50% 30%;
+
+    /* Gold Rosa */
+    --gold: 0 55% 86%;
+    --gold-foreground: 0 40% 30%;
+
+    --muted: 340 20% 96%;
+    --muted-foreground: 340 15% 45%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 340 30% 90%;
+    --input: 340 30% 90%;
+    --ring: 340 70% 75%;
+
+    --radius: 1rem;
+
+    /* Custom Wedding Colors */
+    --wedding-pink: 340 70% 88%;
+    --wedding-mint: 165 50% 80%;
+    --wedding-peach: 20 100% 92%;
+    --wedding-rose-gold: 0 55% 86%;
+    --wedding-cream: 40 100% 97%;
+
+    /* Gradients */
+    --gradient-romantic: linear-gradient(135deg, hsl(340 70% 88%) 0%, hsl(20 100% 92%) 50%, hsl(165 50% 80%) 100%);
+    --gradient-soft: linear-gradient(180deg, hsl(348 100% 99%) 0%, hsl(340 70% 95%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(340 70% 98%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(340 70% 88% / 0.3);
+    --shadow-glow: 0 0 30px hsl(340 70% 88% / 0.4);
+    --shadow-card: 0 8px 32px -8px hsl(340 30% 50% / 0.15);
+
+    /* Sidebar - Romantic Pink */
+    --sidebar-background: 340 70% 97%;
+    --sidebar-foreground: 340 30% 25%;
+    --sidebar-primary: 340 70% 75%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 340 70% 92%;
+    --sidebar-accent-foreground: 340 50% 25%;
+    --sidebar-border: 340 30% 90%;
+    --sidebar-ring: 340 70% 75%;
+  }
+
+  .dark {
+    --background: 340 30% 8%;
+    --foreground: 340 20% 95%;
+
+    --card: 340 30% 12%;
+    --card-foreground: 340 20% 95%;
+
+    --popover: 340 30% 12%;
+    --popover-foreground: 340 20% 95%;
+
+    --primary: 340 50% 65%;
+    --primary-foreground: 340 30% 10%;
+
+    --secondary: 165 30% 35%;
+    --secondary-foreground: 165 20% 95%;
+
+    --accent: 20 60% 45%;
+    --accent-foreground: 20 20% 95%;
+
+    --gold: 0 40% 55%;
+    --gold-foreground: 0 20% 95%;
+
+    --muted: 340 20% 18%;
+    --muted-foreground: 340 15% 65%;
+
+    --destructive: 0 62.8% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 340 20% 20%;
+    --input: 340 20% 20%;
+    --ring: 340 50% 50%;
+
+    --sidebar-background: 340 30% 10%;
+    --sidebar-foreground: 340 20% 95%;
+    --sidebar-primary: 340 50% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 340 30% 18%;
+    --sidebar-accent-foreground: 340 20% 95%;
+    --sidebar-border: 340 20% 20%;
+    --sidebar-ring: 340 50% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .text-gradient-romantic {
+    background: linear-gradient(135deg, hsl(340 70% 55%) 0%, hsl(0 55% 60%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-romantic {
+    background: linear-gradient(135deg, hsl(340 70% 88%) 0%, hsl(20 100% 92%) 50%, hsl(165 50% 85%) 100%);
+  }
+
+  .bg-gradient-soft {
+    background: linear-gradient(180deg, hsl(348 100% 99%) 0%, hsl(340 70% 96%) 100%);
+  }
+
+  .bg-gradient-card {
+    background: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(340 70% 98%) 100%);
+  }
+
+  .shadow-romantic {
+    box-shadow: 0 4px 20px -4px hsl(340 70% 88% / 0.3);
+  }
+
+  .shadow-glow-pink {
+    box-shadow: 0 0 30px hsl(340 70% 88% / 0.4);
+  }
+
+  .glass-card {
+    background: hsl(0 0% 100% / 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(340 30% 90% / 0.5);
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Safe area for mobile */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes heart-beat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(340 70% 95%) 0%,
+    hsl(340 70% 88%) 50%,
+    hsl(340 70% 95%) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-heart-beat {
+  animation: heart-beat 1.5s ease-in-out infinite;
+}
+
+#lovable-badge {
+  display: none !important;
+}

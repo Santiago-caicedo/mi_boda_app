@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npx supabase link:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(cat:*)"
     ]
   }
 }
