@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
-import { Bell, Settings, LogOut } from 'lucide-react';
+import { Bell, Settings, LogOut, Shield } from 'lucide-react';
 import { Button } from './button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -32,7 +32,7 @@ export function PageHeader({
   showUserMenu = true,
   action,
 }: PageHeaderProps) {
-  const { user, signOut } = useAuth();
+  const { user, signOut, isAdmin } = useAuth();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -116,6 +116,12 @@ export function PageHeader({
                   </p>
                 </div>
                 <DropdownMenuSeparator />
+                {isAdmin && (
+                  <DropdownMenuItem onClick={() => navigate('/admin')}>
+                    <Shield className="w-4 h-4 mr-2" />
+                    Panel Admin
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem onClick={() => navigate('/configuracion')}>
                   <Settings className="w-4 h-4 mr-2" />
                   Configuración

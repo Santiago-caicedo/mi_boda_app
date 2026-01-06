@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { OnboardingRoute } from "@/components/auth/OnboardingRoute";
+import { AdminRoute } from "@/components/auth/AdminRoute";
 import { AppLayout } from "@/components/layout/AppLayout";
 import Index from "./pages/Index";
 import Budget from "./pages/Budget";
@@ -15,6 +16,9 @@ import MyDay from "./pages/MyDay";
 import Auth from "./pages/Auth";
 import Onboarding from "./pages/Onboarding";
 import NotFound from "./pages/NotFound";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import UsersList from "./pages/admin/UsersList";
+import CreateUser from "./pages/admin/CreateUser";
 
 const queryClient = new QueryClient();
 
@@ -93,6 +97,31 @@ const App = () => (
                     </AppLayout>
                   </OnboardingRoute>
                 </ProtectedRoute>
+              }
+            />
+            {/* Admin Routes */}
+            <Route
+              path="/admin"
+              element={
+                <AdminRoute>
+                  <AdminDashboard />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/usuarios"
+              element={
+                <AdminRoute>
+                  <UsersList />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/usuarios/nuevo"
+              element={
+                <AdminRoute>
+                  <CreateUser />
+                </AdminRoute>
               }
             />
             <Route path="*" element={<NotFound />} />
