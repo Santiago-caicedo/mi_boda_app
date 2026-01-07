@@ -120,13 +120,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
       return { error };
+    }
+
+    // Verificar si el usuario está activo
+    if (data.user) {
+      const { data: profile } = await supabase
+        .from('user_profiles')
+        .select('is_active')
+        .eq('user_id', data.user.id)
+        .single();
+
+      if (profile && profile.is_active === false) {
+        // Cerrar sesión inmediatamente
+        await supabase.auth.signOut();
+        return {
+          error: new Error('CUENTA_SUSPENDIDA')
+        };
+      }
     }
 
     return { error: null };

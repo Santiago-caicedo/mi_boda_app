@@ -1,17 +1,60 @@
+import { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { user, loading } = useAuth();
+  const { user, loading, signOut, isAdmin } = useAuth();
   const location = useLocation();
+  const [isActive, setIsActive] = useState<boolean | null>(null);
+  const [checking, setChecking] = useState(true);
 
-  if (loading) {
+  useEffect(() => {
+    const checkUserStatus = async () => {
+      if (!user) {
+        setChecking(false);
+        return;
+      }
+
+      // Los admins siempre están activos
+      if (isAdmin) {
+        setIsActive(true);
+        setChecking(false);
+        return;
+      }
+
+      const { data: profile } = await supabase
+        .from('user_profiles')
+        .select('is_active')
+        .eq('user_id', user.id)
+        .single();
+
+      if (profile?.is_active === false) {
+        toast.error('Tu cuenta ha sido suspendida. Comunícate con el administrador para realizar el pago.');
+        await signOut();
+        setIsActive(false);
+      } else {
+        setIsActive(true);
+      }
+      setChecking(false);
+    };
+
+    checkUserStatus();
+
+    // Verificar cada 30 segundos si el usuario sigue activo
+    const interval = setInterval(checkUserStatus, 30000);
+
+    return () => clearInterval(interval);
+  }, [user, isAdmin, signOut]);
+
+  if (loading || checking) {
     return (
       <div className="min-h-screen bg-gradient-soft flex items-center justify-center">
         <motion.div
@@ -28,7 +71,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     );
   }
 
-  if (!user) {
+  if (!user || isActive === false) {
     return <Navigate to="/auth" state={{ from: location }} replace />;
   }
 

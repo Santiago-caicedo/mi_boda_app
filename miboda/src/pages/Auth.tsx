@@ -47,7 +47,13 @@ export default function Auth() {
 
       const { error } = await signIn(email, password);
       if (error) {
-        if (error.message.includes('Invalid login credentials')) {
+        if (error.message === 'CUENTA_SUSPENDIDA') {
+          toast({
+            title: "Cuenta suspendida",
+            description: "Tu cuenta ha sido suspendida. Comunícate con el administrador para realizar el pago y continuar.",
+            variant: "destructive",
+          });
+        } else if (error.message.includes('Invalid login credentials')) {
           toast({
             title: "Error de acceso",
             description: "Email o contraseña incorrectos",
