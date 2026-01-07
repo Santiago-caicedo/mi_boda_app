@@ -78,14 +78,20 @@ export default function Onboarding() {
   };
 
   const handleComplete = async () => {
-    await createProfile.mutateAsync({
-      wedding_date: weddingDate?.toISOString().split('T')[0],
-      total_budget: parseFloat(budget),
-      guest_count: parseInt(guestCount),
-      city,
-      partner1_name: userName,
-    });
-    navigate('/');
+    try {
+      await createProfile.mutateAsync({
+        wedding_date: weddingDate?.toISOString().split('T')[0],
+        total_budget: parseFloat(budget),
+        guest_count: parseInt(guestCount),
+        city,
+        partner1_name: userName,
+      });
+      // Pequeño delay para asegurar que la cache se actualice
+      await new Promise(resolve => setTimeout(resolve, 500));
+      navigate('/', { replace: true });
+    } catch (error) {
+      // El error ya se maneja en el hook
+    }
   };
 
   const slideVariants = {

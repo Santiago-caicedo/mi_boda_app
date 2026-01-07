@@ -54,8 +54,9 @@ export function useCreateOrUpdateWeddingProfile() {
         if (error) throw error;
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['wedding_profile'] });
+    onSuccess: async () => {
+      // Esperar a que la query se refetch completamente antes de continuar
+      await queryClient.refetchQueries({ queryKey: ['wedding_profile'] });
       toast.success('Perfil actualizado');
     },
     onError: (error) => {
